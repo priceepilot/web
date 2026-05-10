@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | PricePilot</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="dashboard-layout.css">
+</head>
+<body>
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <a href="index.html" class="sidebar-logo">
+      <i data-lucide="compass" style="color: var(--accent);"></i>
+      <span>PricePilot</span>
+    </a>
+
+    <nav class="nav-group">
+      <a href="preview.html" class="nav-item">
+        <i data-lucide="cpu"></i>
+        <span>Pricing Engine</span>
+      </a>
+      <a href="preview.html#analytics" class="nav-item">
+        <i data-lucide="bar-chart-3"></i>
+        <span>Analytics Hub</span>
+      </a>
+      <a href="preview.html#tax" class="nav-item">
+        <i data-lucide="globe"></i>
+        <span>Global Tax Hub</span>
+      </a>
+      <a href="preview.html#settings" class="nav-item">
+        <i data-lucide="settings"></i>
+        <span>Settings & API</span>
+      </a>
+    </nav>
+
+    <nav class="nav-group">
+      <span class="nav-label">Documentation</span>
+      <a href="about.html" class="nav-item">
+        <i data-lucide="info"></i>
+        <span>About Us</span>
+      </a>
+      <a href="contact.html" class="nav-item active">
+        <i data-lucide="mail"></i>
+        <span>Contact Us</span>
+      </a>
+      <a href="privacy.html" class="nav-item">
+        <i data-lucide="shield"></i>
+        <span>Privacy Policy</span>
+      </a>
+      <a href="terms.html" class="nav-item">
+        <i data-lucide="file-text"></i>
+        <span>Terms of Service</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <span class="nav-label">Your Account</span>
+      <div class="acc-card">
+        <div class="avatar">D</div>
+        <div class="acc-info">
+          <div class="acc-name">Developer</div>
+          <div class="acc-plan">Free plan</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="top-bar">
+      <div class="top-bar-left">
+        <button class="menu-toggle" id="menu-toggle" aria-label="Open menu">
+          <i data-lucide="menu"></i>
+        </button>
+        <div class="page-heading">
+          <h1>Contact PricePilot</h1>
+          <p>Support, sales questions, and implementation help.</p>
+        </div>
+      </div>
+    </header>
+
+    <div class="content">
+      <section class="doc-page">
+        <div class="doc-hero">
+          <span class="doc-kicker"><i data-lucide="mail" style="width: 14px;"></i> Contact</span>
+          <h1>Talk to the team behind the pricing engine.</h1>
+          <p>If you need help with integration, billing, or rollout planning, use the form or the direct contact points below.</p>
+        </div>
+
+        <div class="contact-layout">
+          <div class="contact-card">
+            <h3>Direct contact</h3>
+            <div class="contact-points">
+              <div class="contact-point">
+                <i data-lucide="mail"></i>
+                <div>
+                  <strong>Email</strong>
+                  <p>Typical response within a few business hours.</p>
+                  <a href="mailto:infoopricepilot@gmail.com">infoopricepilot@gmail.com</a>
+                </div>
+              </div>
+              <div class="contact-point">
+                <i data-lucide="message-square"></i>
+                <div>
+                  <strong>Plan support</strong>
+                  <p>Live assistance is prioritized for Growth and Pro customers.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-form">
+            <h3>Send a message</h3>
+            <p style="margin-bottom: 20px;">Give enough context so the team can respond without going back and forth.</p>
+
+            <form id="contactForm">
+              <div class="input-grid">
+                <div class="field">
+                  <label for="firstName">First Name</label>
+                  <input id="firstName" name="firstName" type="text" required placeholder="John">
+                </div>
+                <div class="field">
+                  <label for="lastName">Last Name</label>
+                  <input id="lastName" name="lastName" type="text" required placeholder="Doe">
+                </div>
+              </div>
+
+              <div class="field" style="margin-top: 18px;">
+                <label for="email">Work Email</label>
+                <input id="email" name="email" type="email" required placeholder="john@company.com">
+              </div>
+
+              <div class="field" style="margin-top: 18px;">
+                <label for="subject">Subject</label>
+                <select id="subject" name="subject">
+                  <option>API Integration Support</option>
+                  <option>Enterprise Pricing Inquiry</option>
+                  <option>Billing Question</option>
+                  <option>Other</option>
+                </select>
+              </div>
+
+              <div class="field" style="margin-top: 18px;">
+                <label for="message">Message</label>
+                <textarea id="message" name="message" style="min-height: 140px; padding-top: 14px;" placeholder="How can we help your team?"></textarea>
+              </div>
+
+              <div class="action-row start">
+                <button type="submit" class="btn" id="contact-submit">
+                  <i data-lucide="send"></i>
+                  <span>Send Message</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="footer-note">&copy; 2026 PricePilot API. All rights reserved.</div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    lucide.createIcons();
+
+    const menuToggle = document.getElementById("menu-toggle");
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("sidebar-overlay");
+
+    if (menuToggle) {
+      menuToggle.addEventListener("click", () => {
+        sidebar.classList.toggle("open");
+        overlay.classList.toggle("active");
+      });
+    }
+
+    if (overlay) {
+      overlay.addEventListener("click", () => {
+        sidebar.classList.remove("open");
+        overlay.classList.remove("active");
+      });
+    }
+
+    const contactForm = document.getElementById("contactForm");
+    const submitButton = document.getElementById("contact-submit");
+
+    contactForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      submitButton.disabled = true;
+      submitButton.innerHTML = '<i data-lucide="loader" class="spin"></i><span>Sending...</span>';
+      lucide.createIcons();
+
+      const formData = new FormData(contactForm);
+      const data = Object.fromEntries(formData);
+      const bodyContent = `PricePilot Contact\nFrom: ${data.firstName} ${data.lastName}\nEmail: ${data.email}\nSubject: ${data.subject}\nMsg: ${data.message}`;
+
+      try {
+        const response = await fetch("https://formspree.io/f/xyzkabwv", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            email: data.email,
+            subject: data.subject,
+            message: bodyContent
+          })
+        });
+
+        if (!response.ok) {
+          throw new Error("Form submit failed");
+        }
+
+        contactForm.innerHTML = '<div class="contact-card" style="padding: 0; border: 0; box-shadow: none; background: transparent;"><h3>Message sent</h3><p>Thanks. The team will reply shortly.</p></div>';
+      } catch (error) {
+        alert("Problem sending. Please email infoopricepilot@gmail.com");
+        submitButton.disabled = false;
+        submitButton.innerHTML = '<i data-lucide="send"></i><span>Send Message</span>';
+        lucide.createIcons();
+      }
+    });
+  </script>
+</body>
+</html>
