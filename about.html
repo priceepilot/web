@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | PricePilot</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="dashboard-layout.css">
+</head>
+<body>
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <a href="index.html" class="sidebar-logo">
+      <i data-lucide="compass" style="color: var(--accent);"></i>
+      <span>PricePilot</span>
+    </a>
+
+    <nav class="nav-group">
+      <a href="preview.html" class="nav-item">
+        <i data-lucide="cpu"></i>
+        <span>Pricing Engine</span>
+      </a>
+      <a href="preview.html#analytics" class="nav-item">
+        <i data-lucide="bar-chart-3"></i>
+        <span>Analytics Hub</span>
+      </a>
+      <a href="preview.html#tax" class="nav-item">
+        <i data-lucide="zap"></i>
+        <span>Optimization Rules</span>
+      </a>
+      <a href="preview.html#settings" class="nav-item">
+        <i data-lucide="settings"></i>
+        <span>Settings & API</span>
+      </a>
+    </nav>
+
+    <nav class="nav-group">
+      <span class="nav-label">Documentation</span>
+      <a href="about.html" class="nav-item active">
+        <i data-lucide="info"></i>
+        <span>About Us</span>
+      </a>
+      <a href="contact.html" class="nav-item">
+        <i data-lucide="mail"></i>
+        <span>Contact Us</span>
+      </a>
+      <a href="privacy.html" class="nav-item">
+        <i data-lucide="shield"></i>
+        <span>Privacy Policy</span>
+      </a>
+      <a href="terms.html" class="nav-item">
+        <i data-lucide="file-text"></i>
+        <span>Terms of Service</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <span class="nav-label">Your Account</span>
+      <div class="acc-card">
+        <div class="avatar">D</div>
+        <div class="acc-info">
+          <div class="acc-name">Developer</div>
+          <div class="acc-plan">Free plan</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="top-bar">
+      <div class="top-bar-left">
+        <button class="menu-toggle" id="menu-toggle" aria-label="Open menu">
+          <i data-lucide="menu"></i>
+        </button>
+        <div class="page-heading">
+          <h1>About PricePilot</h1>
+          <p>Why the product exists and what it is built to solve.</p>
+        </div>
+      </div>
+    </header>
+
+    <div class="content">
+      <section class="doc-page">
+        <div class="doc-hero">
+          <span class="doc-kicker"><i data-lucide="sparkles" style="width: 14px;"></i> Company</span>
+          <h1>Global pricing should feel clean, local, and trustworthy.</h1>
+          <p>PricePilot helps teams handle cross-border pricing without scattering optimization logic, rounding rules, and conversion tracking across multiple tools.</p>
+        </div>
+
+        <div class="doc-grid">
+          <div class="doc-card">
+            <h2>What we are building</h2>
+            <p>Most teams start international pricing with manual tables, one-off formulas, and checkout patches. That usually works until product teams need more control over margin and conversion performance.</p>
+            <p>PricePilot centralizes those decisions into a single pricing engine. It optimizes values, rounds prices to more natural endings, and gives developers a direct API surface instead of forcing them to maintain complex pricing logic in multiple places.</p>
+          </div>
+
+          <div class="stat-stack">
+            <div class="stat-panel">
+              <strong>Developer first</strong>
+              <span class="mini-stat-label">Fast API testing, readable output, and simple integration paths.</span>
+            </div>
+            <div class="stat-panel">
+              <strong>Margin aware</strong>
+              <span class="mini-stat-label">Optimization logic is designed to protect thresholds, not just round attractively.</span>
+            </div>
+            <div class="stat-panel">
+              <strong>Operationally clear</strong>
+              <span class="mini-stat-label">Performance data, response logs, and analytics stay visible in one place for teams.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="doc-grid">
+          <div class="doc-card">
+            <h2>How we think about the product</h2>
+            <ul class="doc-list">
+              <li><i data-lucide="check"></i><span>Pricing should be treated as product infrastructure, not just a static number in a database.</span></li>
+              <li><i data-lucide="check"></i><span>International customers trust prices that look local and predictable.</span></li>
+              <li><i data-lucide="check"></i><span>Developers need transparent request and response flows so they can validate behavior quickly.</span></li>
+            </ul>
+          </div>
+
+          <div class="doc-card">
+            <h2>Where PricePilot fits</h2>
+            <p>PricePilot is intended to sit between your product catalog and your checkout or billing flow. Your app sends the base price and region context, and the engine returns a cleaner sell price along with the data you need to explain that result internally.</p>
+          </div>
+        </div>
+
+        <div class="footer-note">&copy; 2026 PricePilot API. All rights reserved.</div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    lucide.createIcons();
+
+    const menuToggle = document.getElementById("menu-toggle");
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("sidebar-overlay");
+
+    if (menuToggle) {
+      menuToggle.addEventListener("click", () => {
+        sidebar.classList.toggle("open");
+        overlay.classList.toggle("active");
+      });
+    }
+
+    if (overlay) {
+      overlay.addEventListener("click", () => {
+        sidebar.classList.remove("open");
+        overlay.classList.remove("active");
+      });
+    }
+  </script>
+</body>
+</html>
