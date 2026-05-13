@@ -8,7 +8,7 @@ const base = process.env.GITHUB_ACTIONS && githubRepoName ? `/${githubRepoName}/
 module.exports = defineConfig({
   root: __dirname,
   base,
-  publicDir: path.resolve(__dirname, "public"),
+  publicDir: path.resolve(__dirname, "../public"),
   plugins: [
     {
       name: "redirect-public-index",
@@ -27,7 +27,7 @@ module.exports = defineConfig({
     react(),
   ],
   build: {
-    outDir: path.resolve(__dirname, "dist"),
+    outDir: path.resolve(__dirname, "../dist"),
     emptyOutDir: true,
   },
   server: {

@@ -4,15 +4,11 @@ import { auth } from "./firebase";
 import { appPath } from "./paths";
 import "./dashboard-layout.css";
 
-// Dashboard uses these from CDNs in the original code, we'll keep that for now to avoid large npm installs
-// but we'll use them through the window object.
-
 export default function Dashboard() {
   const [user, setUser] = useState(null);
   const [apiKey, setApiKey] = useState(localStorage.getItem("pricepilot.apiKey") || "");
   const [activePanel, setActivePanel] = useState("panel-pricing");
   const [loading, setLoading] = useState(true);
-  const chartRef = useRef(null);
   const [analyticsData, setAnalyticsData] = useState({ summary: {}, recent_activity: [], time_series: [] });
 
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://testpricepilot.onrender.com';
@@ -21,9 +17,6 @@ export default function Dashboard() {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
-      if (!currentUser) {
-        // window.location.href = appPath("auth"); // Redirect to login if not auth
-      }
     });
 
     window.lucide?.createIcons();
@@ -40,38 +33,10 @@ export default function Dashboard() {
     window.location.href = appPath();
   };
 
-  const callApi = async (method, path, body) => {
-    const token = await auth.currentUser?.getIdToken();
-    if (!token) return { ok: false, error: "Not authenticated" };
-
-    const headers = { 
-      "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`
-    };
-
-    try {
-      const res = await fetch(`${API_BASE_URL}${path}`, {
-        method,
-        headers,
-        body: body ? JSON.stringify(body) : undefined
-      });
-      const data = await res.json();
-      return { ok: res.ok, status: res.status, data };
-    } catch (err) {
-      return { ok: false, error: err.message };
-    }
-  };
-
-  // ... (I will implement the UI sections in the return block below)
-
-  if (loading) return <div className="dash-loader-full">Loading PricePilot Dashboard...</div>;
+  if (loading) return <div className="dash-loader-full" style={{ display: 'flex', height: '100vh', alignItems: 'center', justifyContent: 'center', background: '#0a0a0c', color: '#fff' }}>Loading Dashboard...</div>;
 
   return (
     <div className="dashboard-root">
-      {/* 
-          I am keeping the exact same CSS and HTML structure you had, 
-          but now it's inside React for security.
-      */}
       <aside className="sidebar">
         <div className="sidebar-logo">
           <i data-lucide="compass" style={{ color: "var(--accent)" }}></i>
@@ -90,7 +55,7 @@ export default function Dashboard() {
         </nav>
         <div className="sidebar-footer">
           <button className="sidebar-logout-btn" onClick={handleLogout}>
-            <i data-lucide="log-out"></i><span>Logout</span>
+             <i data-lucide="log-out"></i><span>Logout</span>
           </button>
         </div>
       </aside>
@@ -104,20 +69,21 @@ export default function Dashboard() {
 
         <div className="content">
           {activePanel === 'panel-pricing' && (
-            <section id="panel-pricing" className="panel">
+            <section className="panel">
               <div className="playground-wrapper">
-                {/* Same pricing tool UI you had */}
                 <div className="card">
                   <h3>Calculate Price</h3>
-                  <p>Test your pricing rules live.</p>
-                  {/* ... Inputs ... */}
+                  <p>Test your pricing rules live in the cloud.</p>
+                  <div style={{ marginTop: 24, padding: 20, border: '1px dashed var(--border)', borderRadius: 12, textAlign: 'center', color: 'var(--text-muted)' }}>
+                    Pricing Simulation Tools Loading...
+                  </div>
                 </div>
               </div>
             </section>
           )}
 
           {activePanel === 'panel-analytics' && (
-            <section id="panel-analytics" className="panel">
+            <section className="panel">
               <div className="stats-grid">
                  <div className="stat-card"><h3>Requests</h3><div className="value">1,240</div></div>
                  <div className="stat-card"><h3>Lift</h3><div className="value green">+14%</div></div>
@@ -125,12 +91,14 @@ export default function Dashboard() {
             </section>
           )}
           
-          {/* Settings Panel */}
           {activePanel === 'panel-settings' && (
-             <section id="panel-settings" className="panel">
+             <section className="panel">
                 <div className="workbench-card">
                   <h3>Your API Keys</h3>
-                  <p>Keep these secret. Do not share them.</p>
+                  <p>Keep these secret. Do not share them in frontend code.</p>
+                  <div style={{ marginTop: 16, background: 'rgba(0,0,0,0.2)', padding: 12, borderRadius: 8, fontFamily: 'monospace', fontSize: '0.9rem', color: 'var(--accent)' }}>
+                    pp_live_********************************
+                  </div>
                 </div>
              </section>
           )}
