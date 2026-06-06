@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy | PricePilot</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link rel="stylesheet" href="dashboard-layout.css">
+</head>
+<body>
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <a href="index.html" class="sidebar-logo">
+      <i data-lucide="compass" style="color: var(--accent);"></i>
+      <span>PricePilot</span>
+    </a>
+
+    <nav class="nav-group">
+      <a href="preview.html" class="nav-item">
+        <i data-lucide="cpu"></i>
+        <span>Pricing Engine</span>
+      </a>
+      <a href="preview.html#analytics" class="nav-item">
+        <i data-lucide="bar-chart-3"></i>
+        <span>Analytics Hub</span>
+      </a>
+      <a href="preview.html#tax" class="nav-item">
+        <i data-lucide="globe"></i>
+        <span>Global Tax Hub</span>
+      </a>
+      <a href="preview.html#settings" class="nav-item">
+        <i data-lucide="settings"></i>
+        <span>Settings & API</span>
+      </a>
+    </nav>
+
+    <nav class="nav-group">
+      <span class="nav-label">Documentation</span>
+      <a href="about.html" class="nav-item">
+        <i data-lucide="info"></i>
+        <span>About Us</span>
+      </a>
+      <a href="contact.html" class="nav-item">
+        <i data-lucide="mail"></i>
+        <span>Contact Us</span>
+      </a>
+      <a href="privacy.html" class="nav-item active">
+        <i data-lucide="shield"></i>
+        <span>Privacy Policy</span>
+      </a>
+      <a href="terms.html" class="nav-item">
+        <i data-lucide="file-text"></i>
+        <span>Terms of Service</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <span class="nav-label">Your Account</span>
+      <div class="acc-card">
+        <div class="avatar">D</div>
+        <div class="acc-info">
+          <div class="acc-name">Developer</div>
+          <div class="acc-plan">Free plan</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <header class="top-bar">
+      <div class="top-bar-left">
+        <button class="menu-toggle" id="menu-toggle" aria-label="Open menu">
+          <i data-lucide="menu"></i>
+        </button>
+        <div class="page-heading">
+          <h1>Privacy Policy</h1>
+          <p>How account, pricing, and usage data are handled in PricePilot.</p>
+        </div>
+      </div>
+    </header>
+
+    <div class="content">
+      <section class="doc-page">
+        <div class="doc-hero">
+          <span class="doc-kicker"><i data-lucide="shield" style="width: 14px;"></i> Policy</span>
+          <h1>Privacy for pricing, tax, and usage data.</h1>
+          <p>PricePilot is built to process the data needed for pricing decisions while keeping customer account information and API access details constrained to operational use.</p>
+        </div>
+
+        <div class="legal-card">
+          <div class="legal-meta">Last updated: March 23, 2026</div>
+
+          <div class="legal-section">
+            <h2>1. Information we collect</h2>
+            <p>To provide tax-aware pricing and API analytics, PricePilot processes account identifiers, request metadata, and event-level usage details tied to your API activity.</p>
+            <ul class="legal-list">
+              <li><i data-lucide="database"></i><span>Account information such as email addresses and API key records.</span></li>
+              <li><i data-lucide="globe"></i><span>Transaction context such as country, currency, and source metadata used for pricing decisions.</span></li>
+              <li><i data-lucide="bar-chart-3"></i><span>Performance and usage metrics used to present analytics inside the dashboard.</span></li>
+            </ul>
+          </div>
+
+          <div class="legal-section">
+            <h2>2. How information is used</h2>
+            <p>Data is used to execute pricing calculations, protect platform access, and present usage reporting for your account.</p>
+            <div class="legal-highlight">
+              <p>Your product pricing logic and account data are not shared across customer accounts. Operational data is used to serve your workspace and maintain the service.</p>
+            </div>
+            <ul class="legal-list">
+              <li><i data-lucide="calculator"></i><span>Applying current tax and rounding logic to request payloads.</span></li>
+              <li><i data-lucide="shield-check"></i><span>Protecting API access through authentication, monitoring, and abuse prevention.</span></li>
+              <li><i data-lucide="activity"></i><span>Displaying usage, conversion, and optimization performance inside analytics views.</span></li>
+            </ul>
+          </div>
+
+          <div class="legal-section">
+            <h2>3. Security framework</h2>
+            <p>Security controls are intended to reduce unnecessary exposure of account and usage data throughout the product.</p>
+            <ul class="legal-list">
+              <li><i data-lucide="lock"></i><span>API requests are expected to travel over encrypted HTTPS connections.</span></li>
+              <li><i data-lucide="key"></i><span>Key records are stored as hashed values rather than plain-text secrets.</span></li>
+              <li><i data-lucide="archive"></i><span>Only the data required for service operation, auditing, and support is retained.</span></li>
+            </ul>
+          </div>
+
+          <div class="legal-section">
+            <h2>4. Your rights</h2>
+            <p>You may request account support related to exports, deletion, or access concerns by contacting the PricePilot team through the support channels listed on the contact page.</p>
+          </div>
+        </div>
+
+        <div class="footer-note">&copy; 2026 PricePilot API. All rights reserved.</div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    lucide.createIcons();
+
+    const menuToggle = document.getElementById("menu-toggle");
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("sidebar-overlay");
+
+    if (menuToggle) {
+      menuToggle.addEventListener("click", () => {
+        sidebar.classList.toggle("open");
+        overlay.classList.toggle("active");
+      });
+    }
+
+    if (overlay) {
+      overlay.addEventListener("click", () => {
+        sidebar.classList.remove("open");
+        overlay.classList.remove("active");
+      });
+    }
+  </script>
+</body>
+</html>
