@@ -1,3 +1,4 @@
+const path = require("node:path");
 const { defineConfig } = require("vite");
 const react = require("@vitejs/plugin-react");
 
@@ -6,6 +7,7 @@ const base = process.env.GITHUB_ACTIONS && githubRepoName ? `/${githubRepoName}/
 
 module.exports = defineConfig({
   base,
+  cacheDir: path.resolve(__dirname, ".vite-cache"),
   publicDir: "public",
   plugins: [react()],
   build: {
