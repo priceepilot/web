@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
-import AuthPage from "./AuthPage.jsx";
-import Dashboard from "./Dashboard.jsx";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { appHashPath, appPath, currentRoute } from "./paths.js";
+
+const AuthPage = lazy(() => import("./AuthPage.jsx"));
+const Dashboard = lazy(() => import("./Dashboard.jsx"));
 
 const icon = (name, style = {}) => <i data-lucide={name} style={style} />;
 
@@ -84,15 +85,20 @@ function useLandingEffects() {
     );
     document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 
-    const globeScript = document.createElement("script");
-    globeScript.src = appPath("globe.js");
-    globeScript.async = true;
-    document.body.appendChild(globeScript);
+    let disposeGlobe;
+    let cancelled = false;
+
+    import("./globe.js").then(({ initGlobe }) => {
+      if (!cancelled) {
+        disposeGlobe = initGlobe();
+      }
+    });
 
     return () => {
+      cancelled = true;
       window.removeEventListener("scroll", onScroll);
       observer.disconnect();
-      globeScript.remove();
+      disposeGlobe?.();
     };
   }, []);
 }
@@ -583,7 +589,7 @@ function DeveloperHub() {
           <pre>
 <span className="code-comment">// Professional SaaS Integration Example</span>{`
 `}<span className="code-keyword">async function</span>{` `}<span className="code-keyword">getOptimizedPrice</span>{`(base, country) {
-  `}<span className="code-keyword">const</span>{` res = `}<span className="code-keyword">await</span>{` fetch(`}<span className="code-string">'/calculate-price'</span>{`, {
+  `}<span className="code-keyword">const</span>{` res = `}<span className="code-keyword">await</span>{` fetch(`}<span className="code-string">'https://pricepilot-saas-494234282337.us-central1.run.app/calculate-price'</span>{`, {
     method: `}<span className="code-string">'POST'</span>{`,
     headers: { 
       `}<span className="code-string">'Authorization'</span>{`: `}<span className="code-string">'Bearer YOUR_API_KEY'</span>{`,
@@ -702,11 +708,19 @@ export default function App() {
   }, []);
 
   if (path === "/auth" || path === "/auth.html") {
-    return <AuthPage />;
+    return (
+      <Suspense fallback={null}>
+        <AuthPage />
+      </Suspense>
+    );
   }
 
   if (path === "/preview" || path === "/preview.html") {
-    return <Dashboard />;
+    return (
+      <Suspense fallback={null}>
+        <Dashboard />
+      </Suspense>
+    );
   }
 
   return <HomePage />;

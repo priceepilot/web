@@ -2,15 +2,13 @@
  * PricePilot – Interactive 3D Globe
  * Three.js r134 · No external loaders required
  */
-(function () {
-  'use strict';
+import * as THREE from "three";
 
-  /* ── wait for DOM + Three.js ─────────────────────────────── */
-  function init() {
-    if (typeof THREE === 'undefined') { setTimeout(init, 50); return; }
-
+export function initGlobe() {
     const canvas = document.getElementById('globe-canvas');
-    if (!canvas) return;
+    if (!canvas) return undefined;
+
+    const abortController = new AbortController();
 
     /* ── Renderer ────────────────────────────────────────────── */
     const renderer = new THREE.WebGLRenderer({
@@ -282,7 +280,9 @@
     /* ─────────────────────────────────────────────────────────── *
      *  COUNTRY BORDERS
      * ─────────────────────────────────────────────────────────── */
-    fetch('/countries.json')
+    fetch(`${import.meta.env.BASE_URL}countries.json`, {
+      signal: abortController.signal,
+    })
       .then(res => res.json())
       .then(data => {
         // 1. Draw solid borders
@@ -316,7 +316,11 @@
         addRandomDots(ctx); // Add some dots on top of the texture
         earthTex.needsUpdate = true; // Signal Three.js to re-upload texture
       })
-      .catch(err => console.error("Could not load country borders:", err));
+      .catch(err => {
+        if (err.name !== "AbortError") {
+          console.error("Could not load country borders:", err);
+        }
+      });
 
     /* ─────────────────────────────────────────────────────────── *
      *  LIGHTING
@@ -353,18 +357,29 @@
     }
     function onUp() { dragging = false; }
 
-    canvas.addEventListener('mousedown',  e => onDown(e.clientX, e.clientY));
-    window.addEventListener('mousemove',  e => onMove(e.clientX, e.clientY));
-    window.addEventListener('mouseup',    onUp);
-    canvas.addEventListener('touchstart', e => { e.preventDefault(); onDown(e.touches[0].clientX, e.touches[0].clientY); }, { passive: false });
-    canvas.addEventListener('touchmove',  e => { e.preventDefault(); onMove(e.touches[0].clientX, e.touches[0].clientY); }, { passive: false });
-    canvas.addEventListener('touchend',   onUp);
-
-    window.addEventListener('scroll', () => {
+    const handleMouseDown = e => onDown(e.clientX, e.clientY);
+    const handleMouseMove = e => onMove(e.clientX, e.clientY);
+    const handleTouchStart = e => {
+      e.preventDefault();
+      onDown(e.touches[0].clientX, e.touches[0].clientY);
+    };
+    const handleTouchMove = e => {
+      e.preventDefault();
+      onMove(e.touches[0].clientX, e.touches[0].clientY);
+    };
+    const handleScroll = () => {
       // Globe rotation target based on scroll height
       // Reduced multiplier to make the rotation much slower during scroll
       targetScrollRotY = window.scrollY * 0.0005;
-    });
+    };
+
+    canvas.addEventListener('mousedown', handleMouseDown);
+    window.addEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mouseup', onUp);
+    canvas.addEventListener('touchstart', handleTouchStart, { passive: false });
+    canvas.addEventListener('touchmove', handleTouchMove, { passive: false });
+    canvas.addEventListener('touchend', onUp);
+    window.addEventListener('scroll', handleScroll);
 
     /* ─── Cards 3D Orbit anchors ─── */
     const cardElements = [
@@ -403,8 +418,10 @@
      * ─────────────────────────────────────────────────────────── */
     applySize();
 
+    let resizeObserver;
     if (typeof ResizeObserver !== 'undefined') {
-      new ResizeObserver(applySize).observe(canvas.parentElement);
+      resizeObserver = new ResizeObserver(applySize);
+      resizeObserver.observe(canvas.parentElement);
     } else {
       window.addEventListener('resize', applySize);
     }
@@ -413,9 +430,10 @@
      *  ANIMATION LOOP
      * ─────────────────────────────────────────────────────────── */
     const clock = new THREE.Clock();
+    let animationFrameId;
 
     function animate() {
-      requestAnimationFrame(animate);
+      animationFrameId = requestAnimationFrame(animate);
       const t = clock.getElapsedTime();
 
       /* handle smooth scroll rotation + momentum */
@@ -498,12 +516,31 @@
     }
 
     animate();
-  }
 
-  // Start after DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
-})();
+    return () => {
+      abortController.abort();
+      cancelAnimationFrame(animationFrameId);
+      canvas.removeEventListener('mousedown', handleMouseDown);
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', onUp);
+      canvas.removeEventListener('touchstart', handleTouchStart);
+      canvas.removeEventListener('touchmove', handleTouchMove);
+      canvas.removeEventListener('touchend', onUp);
+      window.removeEventListener('scroll', handleScroll);
+      resizeObserver?.disconnect();
+      if (!resizeObserver) {
+        window.removeEventListener('resize', applySize);
+      }
+
+      scene.traverse(object => {
+        object.geometry?.dispose();
+        if (Array.isArray(object.material)) {
+          object.material.forEach(material => material.dispose());
+        } else {
+          object.material?.dispose();
+        }
+      });
+      earthTex.dispose();
+      renderer.dispose();
+    };
+}

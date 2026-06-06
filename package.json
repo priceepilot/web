@@ -3,22 +3,22 @@
   "version": "1.0.0",
   "description": "PricePilot Frontend Only",
   "type": "commonjs",
+  "engines": {
+    "node": ">=20.19.0"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "node server.cjs"
   },
   "dependencies": {
-  "@firebase/app": "^0.14.11",
-  "@firebase/auth": "^1.13.0",
-  "firebase": "^12.0.0",
-  "@supabase/supabase-js": "^2.57.4",
-  "react": "^19.2.5",
-  "react-dom": "^19.2.5",
-  "three": "^0.134.0",
-  "topojson-client": "^3.1.0",
-  "world-atlas": "^2.0.2"
-},
+    "firebase": "^12.0.0",
+    "lucide": "^0.468.0",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "three": "^0.134.0"
+  },
   "devDependencies": {
     "@vitejs/plugin-react": "^6.0.1",
     "vite": "^8.0.10"

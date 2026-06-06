@@ -42,7 +42,7 @@ class PricePilot_WooCommerce {
 
     public function render_settings_page() {
         $apiKey = get_option('pricepilot_api_key', '');
-        $apiUrl = get_option('pricepilot_api_url', 'https://api.pricepilot.site');
+        $apiUrl = get_option('pricepilot_api_url', 'https://pricepilot-saas-494234282337.us-central1.run.app');
         ?>
         <div class="wrap">
             <h1>PricePilot Configuration</h1>
@@ -81,7 +81,7 @@ class PricePilot_WooCommerce {
 
     public function inject_script() {
         $apiKey = get_option('pricepilot_api_key');
-        $apiUrl = get_option('pricepilot_api_url', 'https://api.pricepilot.site');
+        $apiUrl = get_option('pricepilot_api_url', 'https://pricepilot-saas-494234282337.us-central1.run.app');
 
         if (!$apiKey) return;
 

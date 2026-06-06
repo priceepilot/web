@@ -1,7 +1,8 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "./firebase";
 import { appPath } from "./paths";
+import { API_BASE_URL } from "./api";
 import "./dashboard-layout.css";
 
 export default function Dashboard() {
@@ -17,8 +18,6 @@ export default function Dashboard() {
   const [genLoading, setGenLoading] = useState(false);
   const [error, setError] = useState("");
   const [status, setStatus] = useState("");
-
-  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://testpricepilot.onrender.com';
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {

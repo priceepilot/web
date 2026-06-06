@@ -8,7 +8,7 @@
   // These are usually injected by the Shopify/WooCommerce plugin wrapper
   const CONFIG = {
     apiKey: window.PricePilotKey || null,
-    apiBaseUrl: window.PricePilotBaseUrl || 'https://api.pricepilot.site',
+    apiBaseUrl: window.PricePilotBaseUrl || 'https://pricepilot-saas-494234282337.us-central1.run.app',
     selectors: [
       '.price-item--regular', // Shopify
       '.product__price',      // Shopify

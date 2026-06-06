@@ -46,7 +46,7 @@ To run this app properly, you need a **Shopify Partner Account**.
    SHOPIFY_API_KEY=your_api_key
    SHOPIFY_API_SECRET=your_api_secret
    SHOPIFY_APP_URL=https://your-app-url.com
-   API_BASE_URL=https://api.pricepilot.site
+   API_BASE_URL=https://pricepilot-saas-494234282337.us-central1.run.app
    ```
 
 3. **Running Locally**:

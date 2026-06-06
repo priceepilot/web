@@ -7,7 +7,7 @@ import {
   updateProfile,
   sendEmailVerification,
   signOut
-} from "@firebase/auth";
+} from "firebase/auth";
 import { auth, googleProvider } from "./firebase";
 import { storeAuthSession, clearAuthSession } from "./authToken";
 import { appPath } from "./paths.js";
