@@ -3,7 +3,8 @@ const { defineConfig } = require("vite");
 const react = require("@vitejs/plugin-react");
 
 const githubRepoName = process.env.GITHUB_REPOSITORY?.split("/")[1];
-const base = process.env.GITHUB_ACTIONS && githubRepoName ? `/${githubRepoName}/` : "/";
+const base = process.env.VITE_BASE_PATH
+  || (process.env.GITHUB_ACTIONS && githubRepoName ? `/${githubRepoName}/` : "/");
 
 module.exports = defineConfig({
   base,
