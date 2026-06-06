@@ -27,7 +27,7 @@ module.exports = defineConfig({
     react(),
   ],
   build: {
-    outDir: path.resolve(__dirname, "../dist"),
+    outDir: "dist",
     emptyOutDir: true,
   },
   server: {
