@@ -1,0 +1,377 @@
+.ci-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+  padding: 0;
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Header */
+.ci-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--spacing-2);
+}
+
+.ci-title {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin: 0 0 var(--spacing-2) 0;
+  letter-spacing: -0.02em;
+  color: var(--color-text-primary);
+}
+
+.ci-subtitle {
+  font-size: 0.9375rem;
+  color: var(--color-text-secondary);
+  margin: 0;
+}
+
+.ci-header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+.ci-search-box {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  padding: 8px 12px;
+  width: 240px;
+  transition: all 0.2s;
+}
+
+.ci-search-box:focus-within {
+  border-color: var(--color-primary);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.ci-search-icon {
+  color: var(--color-text-secondary);
+  margin-right: 8px;
+}
+
+.ci-search-input {
+  background: transparent;
+  border: none;
+  color: var(--color-text-primary);
+  font-size: 0.875rem;
+  outline: none;
+  width: 100%;
+}
+
+.ci-search-input::placeholder {
+  color: var(--color-text-secondary);
+}
+
+.ci-glass-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.ci-section-title {
+  display: flex;
+  align-items: center;
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--color-text-primary);
+}
+
+/* Top Section Layout */
+.ci-top-section {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: var(--spacing-6);
+  align-items: stretch;
+  min-height: 420px;
+}
+
+/* Map Area */
+.ci-map-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-5) var(--spacing-6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.ci-map-legend {
+  display: flex;
+  gap: 16px;
+}
+
+.ci-legend-item {
+  display: flex;
+  align-items: center;
+  font-size: 0.75rem;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ci-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 6px;
+}
+.ci-dot.optimal { background: var(--color-success); box-shadow: 0 0 8px var(--color-success); }
+.ci-dot.warning { background: var(--color-warning); box-shadow: 0 0 8px var(--color-warning); }
+.ci-dot.critical { background: var(--color-danger); box-shadow: 0 0 8px var(--color-danger); }
+
+.ci-map-container {
+  position: relative;
+  background: transparent;
+  overflow: hidden;
+}
+
+/* Map Controls */
+.ci-map-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 10;
+}
+
+.ci-map-control-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-md);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.ci-map-control-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-text-primary);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Map Markers (SVG) */
+.ci-map-marker-svg {
+  transition: all 0.2s ease-in-out;
+}
+
+.ci-marker-core-svg {
+  fill: #fff;
+  transition: all 0.2s;
+}
+
+.ci-marker-pulse-svg {
+  stroke-width: 1px;
+  animation: map-pulse-svg 2s infinite;
+}
+
+.ci-map-marker-svg.optimal .ci-marker-core-svg { fill: var(--color-success); filter: drop-shadow(0 0 4px var(--color-success)); }
+.ci-map-marker-svg.optimal .ci-marker-pulse-svg { stroke: var(--color-success); fill: rgba(16, 185, 129, 0.2); }
+
+.ci-map-marker-svg.warning .ci-marker-core-svg { fill: var(--color-warning); filter: drop-shadow(0 0 4px var(--color-warning)); }
+.ci-map-marker-svg.warning .ci-marker-pulse-svg { stroke: var(--color-warning); fill: rgba(245, 158, 11, 0.2); }
+
+.ci-map-marker-svg.critical .ci-marker-core-svg { fill: var(--color-danger); filter: drop-shadow(0 0 4px var(--color-danger)); }
+.ci-map-marker-svg.critical .ci-marker-pulse-svg { stroke: var(--color-danger); fill: rgba(239, 68, 68, 0.2); }
+
+.ci-map-marker-svg:hover .ci-marker-core-svg, .ci-map-marker-svg.active .ci-marker-core-svg {
+  transform: scale(1.5);
+  fill: #fff !important;
+}
+
+@keyframes map-pulse-svg {
+  0% { transform: scale(0.5); opacity: 1; }
+  100% { transform: scale(2.0); opacity: 0; }
+}
+
+/* Map Info Panel */
+.ci-map-info-panel {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  width: 200px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  z-index: 20;
+  pointer-events: none;
+  transform: translateY(10px);
+}
+
+.ci-map-info-panel.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.ci-tooltip-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+}
+
+.ci-tooltip-title {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--color-text-primary);
+}
+
+.ci-tooltip-body {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ci-tooltip-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+}
+
+.ci-tooltip-row .font-semibold {
+  color: var(--color-text-primary);
+}
+
+/* Insights Sidebar */
+.ci-insights-sidebar {
+  display: flex;
+  flex-direction: column;
+}
+
+.ci-insights-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ci-insight-card {
+  display: flex;
+  gap: 12px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.ci-insight-icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.ci-insight-card.danger .ci-insight-icon {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--color-danger);
+}
+.ci-insight-card.success .ci-insight-icon {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--color-success);
+}
+.ci-insight-card.warning .ci-insight-icon {
+  background: rgba(245, 158, 11, 0.1);
+  color: var(--color-warning);
+}
+
+.ci-insight-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.ci-insight-country {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  margin-bottom: 4px;
+}
+
+.ci-insight-message {
+  font-size: 0.875rem;
+  color: var(--color-text-primary);
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Data Table */
+.ci-table-header {
+  padding: var(--spacing-5) var(--spacing-6);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.ci-table-container {
+  overflow-x: auto;
+}
+
+.ci-data-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.ci-data-table th {
+  padding: 12px var(--spacing-6);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-secondary);
+  font-weight: 600;
+  border-bottom: 1px solid var(--color-border);
+  background: rgba(0,0,0,0.2);
+}
+
+.ci-data-table td {
+  padding: 16px var(--spacing-6);
+  font-size: 0.875rem;
+  color: var(--color-text-primary);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  transition: background 0.2s;
+}
+
+.ci-data-table tr:last-child td {
+  border-bottom: none;
+}
+
+.ci-data-table tr:hover td, .ci-row-hover td {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.ci-table-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.ci-table-dot.optimal { background: var(--color-success); }
+.ci-table-dot.warning { background: var(--color-warning); }
+.ci-table-dot.critical { background: var(--color-danger); }

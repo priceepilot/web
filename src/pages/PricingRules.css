@@ -1,0 +1,350 @@
+.pr-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+  padding-bottom: var(--spacing-8);
+}
+
+/* Header */
+.pr-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: var(--spacing-2);
+}
+
+.pr-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+
+.pr-subtitle {
+  color: var(--color-text-secondary);
+  font-size: 15px;
+}
+
+.pr-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.pr-search-box {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  padding: 8px 12px;
+  width: 240px;
+  transition: all 0.2s;
+}
+
+.pr-search-box:focus-within {
+  border-color: var(--color-primary);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.pr-search-icon {
+  color: var(--color-text-secondary);
+  margin-right: 8px;
+}
+
+.pr-search-input {
+  background: transparent;
+  border: none;
+  color: var(--color-text-primary);
+  font-size: 0.875rem;
+  outline: none;
+  width: 100%;
+}
+
+.pr-search-input::placeholder {
+  color: var(--color-text-secondary);
+}
+
+/* Glass Card */
+.pr-glass-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.pr-section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+/* KPI Grid */
+.pr-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-6);
+}
+
+.pr-kpi-content {
+  padding: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pr-kpi-left {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pr-kpi-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+.pr-kpi-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+
+.pr-kpi-icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Main Grid */
+.pr-main-grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: var(--spacing-6);
+  align-items: start;
+}
+
+/* Table */
+.pr-table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.pr-data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.pr-data-table th {
+  text-align: left;
+  padding: 16px 24px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(0,0,0,0.2);
+}
+
+.pr-data-table td {
+  padding: 20px 24px;
+  font-size: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  vertical-align: top;
+}
+
+.pr-row-inactive td {
+  opacity: 0.5;
+}
+
+.pr-rule-name-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.pr-rule-name {
+  font-weight: 600;
+  color: #fff;
+  font-size: 15px;
+}
+
+.pr-badge-small {
+  font-size: 11px;
+  padding: 2px 8px;
+}
+
+.pr-rule-logic {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.pr-logic-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.pr-logic-if {
+  color: var(--color-text-secondary);
+  font-weight: 700;
+  font-size: 11px;
+  padding: 2px 6px;
+  background: rgba(255,255,255,0.05);
+  border-radius: 4px;
+  display: inline-flex;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.pr-logic-then {
+  color: var(--color-primary);
+  font-weight: 700;
+  font-size: 11px;
+  padding: 2px 6px;
+  background: rgba(13, 148, 136, 0.1);
+  border-radius: 4px;
+  display: inline-flex;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.pr-logic-text {
+  color: var(--color-text-primary);
+}
+
+.pr-rule-impact {
+  display: inline-flex;
+  align-items: center;
+  height: 100%;
+}
+
+.pr-icon-btn {
+  background: transparent;
+  border: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.pr-icon-btn:hover {
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+}
+
+.pr-actions-cell {
+  text-align: right;
+}
+
+/* Custom Toggle Switch */
+.pr-toggle-switch {
+  width: 40px;
+  height: 22px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  border: none;
+  position: relative;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  padding: 0;
+  outline: none;
+}
+
+.pr-toggle-switch.active {
+  background: var(--color-primary);
+}
+
+.pr-toggle-knob {
+  width: 18px;
+  height: 18px;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.pr-toggle-switch.active .pr-toggle-knob {
+  transform: translateX(18px);
+}
+
+/* Sidebar */
+.pr-sidebar {
+  display: flex;
+  flex-direction: column;
+}
+
+.pr-suggestions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pr-suggestion-card {
+  transition: all 0.2s ease;
+}
+
+.pr-suggestion-card:hover {
+  border-color: rgba(255,255,255,0.15);
+  transform: translateY(-1px);
+}
+
+.pr-suggestion-content {
+  padding: 20px;
+}
+
+.pr-suggestion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.pr-suggestion-title {
+  font-weight: 600;
+  color: #fff;
+  font-size: 15px;
+}
+
+.pr-suggestion-desc {
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0 0 16px 0;
+}
+
+.pr-suggestion-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding-top: 16px;
+}
+
+.pr-suggestion-expected {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-success);
+}
+
+.pr-activate-btn {
+  font-weight: 600;
+}

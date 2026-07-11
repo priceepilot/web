@@ -1,0 +1,43 @@
+.layout-container {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--color-background);
+}
+
+.layout-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  transition: margin-left 0s;
+}
+
+.layout-content.is-pinned {
+  margin-left: 280px;
+}
+
+.layout-content.is-unpinned {
+  margin-left: 56px;
+}
+
+.layout-main {
+  flex: 1;
+  padding: var(--spacing-6);
+  overflow-y: auto;
+  scrollbar-width: none;      /* Firefox */
+  -ms-overflow-style: none;   /* IE / Edge */
+}
+
+.layout-main.no-bottom-padding {
+  padding-bottom: 0;
+}
+
+.layout-main::-webkit-scrollbar {
+  display: none;              /* Chrome / Safari */
+}
+
+@media (max-width: 768px) {
+  .layout-content {
+    margin-left: 0;
+  }
+}

@@ -1,0 +1,227 @@
+.sa-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+  padding-bottom: var(--spacing-8);
+}
+
+/* Header */
+.sa-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: var(--spacing-4);
+}
+
+.sa-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+
+.sa-subtitle {
+  color: var(--color-text-secondary);
+  font-size: 15px;
+}
+
+.sa-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Sidebar */
+.sa-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+}
+
+/* Grid Layout */
+.sa-content-grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: var(--spacing-6);
+  align-items: start;
+}
+
+/* Glass Card */
+.sa-glass-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.sa-section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+/* Alerts Feed */
+.sa-alerts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sa-alert-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.015);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-md);
+  transition: all 0.2s ease;
+}
+
+.sa-alert-card:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+
+.sa-alert-content {
+  padding: 20px 24px;
+  display: flex;
+  gap: 16px;
+}
+
+.sa-alert-icon-wrap {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.sa-alert-card.critical .sa-alert-icon-wrap { color: var(--color-danger); background: rgba(244, 63, 94, 0.05); border-color: rgba(244, 63, 94, 0.1); }
+.sa-alert-card.warning .sa-alert-icon-wrap { color: var(--color-warning); background: rgba(251, 191, 36, 0.05); border-color: rgba(251, 191, 36, 0.1); }
+.sa-alert-card.info .sa-alert-icon-wrap { color: var(--color-primary); background: rgba(14, 165, 233, 0.05); border-color: rgba(14, 165, 233, 0.1); }
+
+.sa-alert-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.sa-alert-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 8px;
+}
+
+.sa-alert-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sa-alert-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  margin: 0;
+}
+
+.sa-alert-time {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+.sa-alert-description {
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0 0 16px 0;
+}
+
+.sa-alert-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 16px;
+}
+
+.sa-alert-impact {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+.sa-action-btn {
+  font-weight: 600;
+}
+
+/* Sidebar Stats */
+.sa-stats-card {
+  padding: 24px;
+}
+
+.sa-stat-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.sa-stat-label {
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.sa-stat-value {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.sa-stat-progress {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.sa-stat-bar {
+  height: 100%;
+  border-radius: 3px;
+}
+
+.sa-stat-bar.success { background: var(--color-success); box-shadow: 0 0 8px var(--color-success); }
+.sa-stat-bar.warning { background: var(--color-warning); box-shadow: 0 0 8px var(--color-warning); }
+
+.sa-stat-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 20px 0;
+}
+
+.sa-system-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sa-system-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--color-text-primary);
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 255, 255, 0.02);
+}

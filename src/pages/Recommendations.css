@@ -1,0 +1,273 @@
+.rec-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+  padding-bottom: var(--spacing-8);
+}
+
+/* Header */
+.rec-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: var(--spacing-2);
+}
+
+.rec-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+
+.rec-subtitle {
+  color: var(--color-text-secondary);
+  font-size: 15px;
+}
+
+.rec-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.rec-search-box {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  padding: 8px 12px;
+  width: 240px;
+  transition: all 0.2s;
+}
+
+.rec-search-box:focus-within {
+  border-color: var(--color-primary);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.rec-search-icon {
+  color: var(--color-text-secondary);
+  margin-right: 8px;
+}
+
+.rec-search-input {
+  background: transparent;
+  border: none;
+  color: var(--color-text-primary);
+  font-size: 0.875rem;
+  outline: none;
+  width: 100%;
+}
+
+.rec-search-input::placeholder {
+  color: var(--color-text-secondary);
+}
+
+/* Tabs */
+.rec-tabs {
+  display: flex;
+  gap: 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: var(--spacing-4);
+}
+
+.rec-tab-btn {
+  background: none;
+  border: none;
+  color: var(--color-text-secondary);
+  padding: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: color 0.2s;
+}
+
+.rec-tab-btn:hover {
+  color: var(--color-text-primary);
+}
+
+.rec-tab-btn.active {
+  color: #fff;
+}
+
+.rec-tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--color-primary);
+  border-radius: 2px 2px 0 0;
+}
+
+.rec-tab-badge {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.rec-tab-badge.new {
+  background: rgba(13, 148, 136, 0.2);
+  color: var(--color-primary);
+}
+
+.rec-tab-badge.progress {
+  background: rgba(59, 130, 246, 0.2);
+  color: #60A5FA;
+}
+
+/* Glass Card */
+.rec-glass-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.rec-glass-card:hover {
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+}
+
+/* Opportunity Feed */
+.rec-feed {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.rec-opp-content {
+  padding: 0;
+  display: flex;
+  align-items: stretch;
+}
+
+.rec-opp-main {
+  flex: 1;
+  padding: 24px;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.rec-opp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.rec-opp-title-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.rec-opp-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #fff;
+  margin: 0;
+}
+
+.rec-icon-btn {
+  background: transparent;
+  border: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.rec-icon-btn:hover {
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+}
+
+.rec-opp-desc {
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0 0 20px 0;
+  max-width: 800px;
+}
+
+.rec-opp-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.rec-meta-divider {
+  width: 1px;
+  height: 16px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.rec-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-text-secondary);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Opportunity Sidebar (Right side of card) */
+.rec-opp-sidebar {
+  width: 240px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+.rec-impact-box {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 16px;
+}
+
+.rec-impact-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.rec-impact-value {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-success);
+}
+
+.rec-effort-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  margin-bottom: 24px;
+}
+
+.rec-effort-label {
+  color: var(--color-text-secondary);
+}
+
+.rec-effort-value {
+  font-weight: 600;
+}
+
+.rec-action-area {
+  margin-top: auto;
+}

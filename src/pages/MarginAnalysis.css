@@ -1,0 +1,317 @@
+.ma-layout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+  padding-bottom: var(--spacing-8);
+}
+
+/* Header */
+.ma-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: var(--spacing-4);
+}
+
+.ma-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.02em;
+  margin-bottom: 4px;
+}
+
+.ma-subtitle {
+  color: var(--color-text-secondary);
+  font-size: 15px;
+}
+
+.ma-header-actions {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+/* Time Toggles */
+.ma-time-toggles {
+  display: flex;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  padding: 4px;
+}
+
+.ma-time-btn {
+  background: transparent;
+  border: none;
+  color: var(--color-text-secondary);
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.ma-time-btn:hover {
+  color: var(--color-text-primary);
+}
+
+.ma-time-btn.active {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-text-primary);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+/* Glass Card Shared */
+.ma-glass-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.ma-section-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+}
+
+/* KPI Grid */
+.ma-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-6);
+}
+
+.ma-kpi-content {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ma-kpi-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.ma-kpi-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+.ma-kpi-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--color-text-secondary);
+}
+
+.ma-kpi-icon.optimal {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--color-success);
+}
+
+.ma-kpi-icon.critical {
+  background: rgba(244, 63, 94, 0.1);
+  color: var(--color-danger);
+}
+
+.ma-kpi-value {
+  font-size: 32px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+
+.ma-kpi-trend {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.ma-kpi-trend.success { color: var(--color-success); }
+.ma-kpi-trend.danger { color: var(--color-danger); }
+.ma-kpi-trend.neutral { color: var(--color-text-secondary); }
+
+/* Main Grid */
+.ma-main-grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: var(--spacing-6);
+  align-items: stretch;
+  min-height: 420px;
+}
+
+/* Chart */
+.ma-chart-container {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  margin-top: 16px;
+}
+
+/* Custom Tooltip */
+.ma-chart-tooltip {
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  min-width: 200px;
+}
+
+.ma-tooltip-label {
+  color: var(--color-text-primary);
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+
+.ma-tooltip-metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ma-tooltip-row {
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+}
+
+.ma-tooltip-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.ma-tooltip-name {
+  color: var(--color-text-secondary);
+  flex: 1;
+}
+
+.ma-tooltip-value {
+  color: var(--color-text-primary);
+  font-weight: 500;
+}
+
+.ma-tooltip-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 4px 0;
+}
+
+.ma-tooltip-row.total .ma-tooltip-name {
+  color: var(--color-text-primary);
+  font-weight: 600;
+}
+
+.ma-tooltip-row.total .ma-tooltip-value {
+  font-weight: 700;
+}
+
+/* Leakage List */
+.ma-leakage-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+  overflow-y: auto;
+  min-height: 0;
+}
+
+.ma-leak-card {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-md);
+  padding: 16px;
+}
+
+.ma-leak-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.ma-leak-source {
+  font-weight: 500;
+  color: var(--color-text-primary);
+  font-size: 14px;
+}
+
+.ma-leak-trend {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.ma-leak-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.ma-leak-amount {
+  font-size: 24px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+
+/* Table */
+.ma-table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.ma-table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.ma-data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ma-data-table th {
+  text-align: left;
+  padding: 16px 24px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.ma-data-table td {
+  padding: 16px 24px;
+  font-size: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+.ma-data-table tr:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.text-success { color: var(--color-success) !important; }
+.text-danger { color: var(--color-danger) !important; }
+.text-warning { color: var(--color-warning) !important; }
