@@ -30,24 +30,7 @@ export function PricingPage() {
 
   return (
     <div className="pricing-page-container">
-      {/* Header */}
-      <header className="pricing-header">
-        <Link to="/" className="landing-logo">
-          <div className="logo-icon" style={{ background: 'transparent', width: 'auto', height: 'auto' }}>
-            <img src="/logo.png" alt="PricePilot" style={{ width: '32px', height: '32px', borderRadius: '8px' }} />
-          </div>
-          PricePilot
-        </Link>
-        <nav className="landing-nav">
-          <Link to="/#features">Features</Link>
-          <Link to="/pricing">Pricing</Link>
-          <a href="#">Documentation</a>
-        </nav>
-        <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-          <Link to="/login" style={{ color: '#fff', textDecoration: 'none', fontSize: '0.875rem', fontWeight: 500 }}>Sign In</Link>
-          <Link to="/login" className="landing-btn-contact">Go to Dashboard</Link>
-        </div>
-      </header>
+
 
       {/* Hero */}
       <section className="pricing-hero">
@@ -174,29 +157,29 @@ export function PricingPage() {
               <tr><td colSpan="4" className="table-category">Intelligence & Rules</td></tr>
               <tr>
                 <td>Rule-based Repricing</td>
-                <td><Check size={16} color="var(--lp-success)" /></td>
-                <td><Check size={16} color="var(--lp-success)" /></td>
-                <td><Check size={16} color="var(--lp-success)" /></td>
+                <td><Check size={16} color="#10B981" /></td>
+                <td><Check size={16} color="#10B981" /></td>
+                <td><Check size={16} color="#10B981" /></td>
               </tr>
               <tr>
                 <td>AI Margin Optimizer</td>
-                <td><X size={16} color="rgba(255,255,255,0.2)" /></td>
-                <td><Check size={16} color="var(--lp-success)" /></td>
-                <td><Check size={16} color="var(--lp-success)" /></td>
+                <td><X size={16} color="#CBD5E1" /></td>
+                <td><Check size={16} color="#10B981" /></td>
+                <td><Check size={16} color="#10B981" /></td>
               </tr>
               <tr>
                 <td>Global FX Automation</td>
-                <td><X size={16} color="rgba(255,255,255,0.2)" /></td>
-                <td><Check size={16} color="var(--lp-success)" /></td>
-                <td><Check size={16} color="var(--lp-success)" /></td>
+                <td><X size={16} color="#CBD5E1" /></td>
+                <td><Check size={16} color="#10B981" /></td>
+                <td><Check size={16} color="#10B981" /></td>
               </tr>
 
               <tr><td colSpan="4" className="table-category">Support & Security</td></tr>
               <tr>
                 <td>API & Webhooks</td>
-                <td><X size={16} color="rgba(255,255,255,0.2)" /></td>
-                <td><Check size={16} color="var(--lp-success)" /></td>
-                <td><Check size={16} color="var(--lp-success)" /></td>
+                <td><X size={16} color="#CBD5E1" /></td>
+                <td><Check size={16} color="#10B981" /></td>
+                <td><Check size={16} color="#10B981" /></td>
               </tr>
               <tr>
                 <td>Support Level</td>
@@ -206,9 +189,9 @@ export function PricingPage() {
               </tr>
               <tr>
                 <td>SOC2 Compliance Report</td>
-                <td><X size={16} color="rgba(255,255,255,0.2)" /></td>
-                <td><X size={16} color="rgba(255,255,255,0.2)" /></td>
-                <td><Check size={16} color="var(--lp-success)" /></td>
+                <td><X size={16} color="#CBD5E1" /></td>
+                <td><X size={16} color="#CBD5E1" /></td>
+                <td><Check size={16} color="#10B981" /></td>
               </tr>
             </tbody>
           </table>
