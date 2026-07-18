@@ -1,13 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Check, X, Info, Mountain } from 'lucide-react';
 import { Reveal } from '../components/Reveal';
+import { auth } from '../firebase';
+import { onAuthStateChanged } from 'firebase/auth';
 import './PricingPage.css';
 
 
 export function PricingPage() {
   const [isAnnual, setIsAnnual] = useState(true);
   const [openFaq, setOpenFaq] = useState(null);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+    });
+    return () => unsubscribe();
+  }, []);
 
   const faqs = [
     {
@@ -64,7 +74,11 @@ export function PricingPage() {
               $0<span className="tier-price-period">/mo</span>
             </div>
             <p className="tier-desc">Perfect for testing the waters and small catalogs.</p>
-            <Link to="/login" className="tier-btn outline">Start for free</Link>
+            {user ? (
+              <Link to="/dashboard" className="tier-btn outline">Go to Dashboard</Link>
+            ) : (
+              <Link to="/login" className="tier-btn outline">Start for free</Link>
+            )}
             
             <div className="tier-features-title">What's included</div>
             <ul className="tier-features">
@@ -85,7 +99,11 @@ export function PricingPage() {
               ${isAnnual ? '63' : '79'}<span className="tier-price-period">/mo</span>
             </div>
             <p className="tier-desc">For growing ecommerce brands that need serious automation.</p>
-            <Link to="/login" className="tier-btn accent">Get started</Link>
+            {user ? (
+              <Link to="/dashboard" className="tier-btn accent">Go to Dashboard</Link>
+            ) : (
+              <Link to="/login" className="tier-btn accent">Get started</Link>
+            )}
             
             <div className="tier-features-title">Everything in Starter, plus</div>
             <ul className="tier-features">
@@ -106,7 +124,11 @@ export function PricingPage() {
               Custom
             </div>
             <p className="tier-desc">For large-scale operations with custom workflows.</p>
-            <Link to="/contact" className="tier-btn outline">Contact Sales</Link>
+            {user ? (
+              <Link to="/dashboard" className="tier-btn outline">Go to Dashboard</Link>
+            ) : (
+              <Link to="/contact" className="tier-btn outline">Contact Sales</Link>
+            )}
             
             <div className="tier-features-title">Everything in Pro, plus</div>
             <ul className="tier-features">

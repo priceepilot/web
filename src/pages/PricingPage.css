@@ -148,7 +148,7 @@
   top: -12px;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--lp-accent);
+  background: var(--lp-accent, #0FA392);
   color: #fff;
   padding: 4px 16px;
   border-radius: 20px;
