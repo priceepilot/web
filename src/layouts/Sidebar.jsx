@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { 
   LayoutDashboard, TrendingUp, Sparkles, LineChart, Globe, 
   PieChart, Bell, Settings2, Lightbulb, Beaker, Store, 
   Link as LinkIcon, Users, CreditCard, Settings, Search, 
   Star, Clock, Pin, PinOff, ChevronDown, X, Anchor,
-  Compass, Brain, Zap, Layers, Shield
+  Compass, Brain, Zap, Layers, Shield, LogOut
 } from 'lucide-react';
+import { signOut } from 'firebase/auth';
+import { auth } from '../firebase';
 import clsx from 'clsx';
 import { Badge } from '../components/Badge';
 import './Sidebar.css';
@@ -57,9 +59,20 @@ const NAVIGATION = [
 ];
 
 export function Sidebar({ isOpen, onClose, isPinned, togglePinned }) {
+  const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [openMenus, setOpenMenus] = useState([]); // default closed
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      navigate('/login');
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
+  };
 
   const toggleMenu = (name) => {
     setOpenMenus(prev => 
@@ -88,7 +101,7 @@ export function Sidebar({ isOpen, onClose, isPinned, togglePinned }) {
       >
         <div className="sidebar-header">
           <div className="sidebar-logo">
-            <Anchor className="sidebar-logo-icon" size={24} />
+            <img src="/logo.png" alt="PricePilot" className="sidebar-logo-icon" style={{ width: '28px', height: '28px', borderRadius: '6px' }} />
             <div className="sidebar-logo-text-wrapper">
               <span className="sidebar-logo-text">PricePilot</span>
               <span className="sidebar-logo-subtitle">AI Profit Intelligence</span>
@@ -172,59 +185,108 @@ export function Sidebar({ isOpen, onClose, isPinned, togglePinned }) {
         </div>
 
         <div className="sidebar-footer">
-          <button className="sidebar-user-btn" title="Acme Apparel">
-            <div className="sidebar-avatar">A</div>
-            <div className="sidebar-user-info">
-              <span className="sidebar-user-name">Acme Apparel</span>
-              <span className="sidebar-user-plan">Growth Plan</span>
-            </div>
-            <div className="sidebar-user-actions">
-              <div className="sidebar-icon-btn" title="Notifications" onClick={(e) => { e.stopPropagation(); setIsNotificationsOpen(!isNotificationsOpen); }} style={{ position: 'relative' }}>
-                <Bell size={16} />
-                <span className="sidebar-badge-dot"></span>
-                
-                {isNotificationsOpen && (
-                  <div className="notifications-popover" style={{
-                    position: 'absolute',
-                    bottom: 'calc(100% + 12px)',
-                    left: '0',
-                    width: '320px',
-                    background: 'var(--color-surface)',
-                    border: '1px solid var(--color-border)',
-                    borderRadius: '8px',
-                    boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.5)',
-                    zIndex: 100,
-                    overflow: 'hidden',
-                    cursor: 'default',
-                    textAlign: 'left'
-                  }} onClick={e => e.stopPropagation()}>
-                    <div style={{ padding: '12px 16px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                      <h4 style={{ margin: 0, fontSize: '14px', fontWeight: '600', color: 'var(--color-text-primary)' }}>Notifications</h4>
-                      <span style={{ fontSize: '12px', color: 'var(--color-primary)', cursor: 'pointer' }}>Mark all as read</span>
-                    </div>
-                    <div style={{ maxHeight: '300px', overflowY: 'auto' }}>
-                      <div style={{ padding: '12px 16px', borderBottom: '1px solid var(--color-border)', background: 'var(--color-background-soft)' }}>
-                        <h5 style={{ margin: '0 0 4px 0', fontSize: '13px', fontWeight: '600', color: 'var(--color-text-primary)' }}>Margin Alert: Germany</h5>
-                        <p style={{ margin: 0, fontSize: '12px', color: 'var(--color-text-secondary)', lineHeight: '1.4' }}>Profit margins dropped by 2.4% on Amazon DE in the last 24h.</p>
-                        <span style={{ fontSize: '10px', color: 'var(--color-text-secondary)', marginTop: '6px', display: 'block' }}>2 mins ago</span>
-                      </div>
-                      <div style={{ padding: '12px 16px', borderBottom: '1px solid var(--color-border)' }}>
-                        <h5 style={{ margin: '0 0 4px 0', fontSize: '13px', fontWeight: '600', color: 'var(--color-text-primary)' }}>Sync Completed</h5>
-                        <p style={{ margin: 0, fontSize: '12px', color: 'var(--color-text-secondary)', lineHeight: '1.4' }}>Acme Apparel UK product catalog successfully synced.</p>
-                        <span style={{ fontSize: '10px', color: 'var(--color-text-secondary)', marginTop: '6px', display: 'block' }}>1 hour ago</span>
-                      </div>
-                      <div style={{ padding: '12px 16px' }}>
-                        <h5 style={{ margin: '0 0 4px 0', fontSize: '13px', fontWeight: '600', color: 'var(--color-text-primary)' }}>New Copilot Suggestion</h5>
-                        <p style={{ margin: 0, fontSize: '12px', color: 'var(--color-text-secondary)', lineHeight: '1.4' }}>PricePilot found a $1.2k optimization opportunity for Winter Coats.</p>
-                        <span style={{ fontSize: '10px', color: 'var(--color-text-secondary)', marginTop: '6px', display: 'block' }}>3 hours ago</span>
-                      </div>
-                    </div>
-                  </div>
-                )}
+          <div style={{ position: 'relative' }}>
+            <button 
+              className="sidebar-user-btn" 
+              title="Acme Apparel" 
+              onClick={(e) => { e.stopPropagation(); setIsUserMenuOpen(!isUserMenuOpen); setIsNotificationsOpen(false); }}
+            >
+              <div className="sidebar-avatar">A</div>
+              <div className="sidebar-user-info">
+                <span className="sidebar-user-name">Acme Apparel</span>
+                <span className="sidebar-user-plan">Growth Plan</span>
               </div>
-              <ChevronDown size={14} className="sidebar-user-chevron" />
-            </div>
-          </button>
+              <div className="sidebar-user-actions">
+                <div className="sidebar-icon-btn" title="Notifications" onClick={(e) => { e.stopPropagation(); setIsNotificationsOpen(!isNotificationsOpen); setIsUserMenuOpen(false); }} style={{ position: 'relative' }}>
+                  <Bell size={16} />
+                  <span className="sidebar-badge-dot"></span>
+                  
+                  {isNotificationsOpen && (
+                    <div className="notifications-popover" style={{
+                      position: 'absolute',
+                      bottom: 'calc(100% + 12px)',
+                      left: '0',
+                      width: '320px',
+                      background: 'var(--color-surface)',
+                      border: '1px solid var(--color-border)',
+                      borderRadius: '8px',
+                      boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.5)',
+                      zIndex: 100,
+                      overflow: 'hidden',
+                      cursor: 'default',
+                      textAlign: 'left'
+                    }} onClick={e => e.stopPropagation()}>
+                      <div style={{ padding: '12px 16px', borderBottom: '1px solid var(--color-border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                        <h4 style={{ margin: 0, fontSize: '14px', fontWeight: '600', color: 'var(--color-text-primary)' }}>Notifications</h4>
+                        <span style={{ fontSize: '12px', color: 'var(--color-primary)', cursor: 'pointer' }}>Mark all as read</span>
+                      </div>
+                      <div style={{ maxHeight: '300px', overflowY: 'auto' }}>
+                        <div style={{ padding: '12px 16px', borderBottom: '1px solid var(--color-border)', background: 'var(--color-background-soft)' }}>
+                          <h5 style={{ margin: '0 0 4px 0', fontSize: '13px', fontWeight: '600', color: 'var(--color-text-primary)' }}>Margin Alert: Germany</h5>
+                          <p style={{ margin: 0, fontSize: '12px', color: 'var(--color-text-secondary)', lineHeight: '1.4' }}>Profit margins dropped by 2.4% on Amazon DE in the last 24h.</p>
+                          <span style={{ fontSize: '10px', color: 'var(--color-text-secondary)', marginTop: '6px', display: 'block' }}>2 mins ago</span>
+                        </div>
+                        <div style={{ padding: '12px 16px', borderBottom: '1px solid var(--color-border)' }}>
+                          <h5 style={{ margin: '0 0 4px 0', fontSize: '13px', fontWeight: '600', color: 'var(--color-text-primary)' }}>Sync Completed</h5>
+                          <p style={{ margin: 0, fontSize: '12px', color: 'var(--color-text-secondary)', lineHeight: '1.4' }}>Acme Apparel UK product catalog successfully synced.</p>
+                          <span style={{ fontSize: '10px', color: 'var(--color-text-secondary)', marginTop: '6px', display: 'block' }}>1 hour ago</span>
+                        </div>
+                        <div style={{ padding: '12px 16px' }}>
+                          <h5 style={{ margin: '0 0 4px 0', fontSize: '13px', fontWeight: '600', color: 'var(--color-text-primary)' }}>New Copilot Suggestion</h5>
+                          <p style={{ margin: 0, fontSize: '12px', color: 'var(--color-text-secondary)', lineHeight: '1.4' }}>PricePilot found a $1.2k optimization opportunity for Winter Coats.</p>
+                          <span style={{ fontSize: '10px', color: 'var(--color-text-secondary)', marginTop: '6px', display: 'block' }}>3 hours ago</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <ChevronDown size={14} className="sidebar-user-chevron" />
+              </div>
+            </button>
+            
+            {isUserMenuOpen && (
+              <div style={{
+                position: 'absolute',
+                bottom: '100%',
+                left: '0',
+                right: '0',
+                marginBottom: '8px',
+                background: 'var(--color-surface)',
+                border: '1px solid var(--color-border)',
+                borderRadius: '8px',
+                boxShadow: '0 4px 20px rgba(0, 0, 0, 0.4)',
+                zIndex: 100,
+                padding: '8px',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '4px'
+              }}>
+                <button 
+                  onClick={handleLogout}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '12px',
+                    width: '100%',
+                    padding: '10px 12px',
+                    background: 'transparent',
+                    border: 'none',
+                    borderRadius: '6px',
+                    color: '#EF4444',
+                    fontSize: '14px',
+                    fontWeight: '500',
+                    cursor: 'pointer',
+                    textAlign: 'left'
+                  }}
+                  onMouseOver={(e) => e.currentTarget.style.background = 'rgba(239, 68, 68, 0.1)'}
+                  onMouseOut={(e) => e.currentTarget.style.background = 'transparent'}
+                >
+                  <LogOut size={16} />
+                  Log out
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </>

@@ -35,6 +35,7 @@ import { MarginProtectionPage } from './pages/MarginProtectionPage';
 import { AutomationPage } from './pages/AutomationPage';
 import { MainReportsPage } from './pages/MainReportsPage';
 import { ScrollToTop } from './components/ScrollToTop';
+import { ProtectedRoute } from './components/ProtectedRoute';
 
 function App() {
   return (
@@ -47,7 +48,7 @@ function App() {
         <Route path="/signup" element={<LoginPage defaultIsLogin={false} />} />
         <Route path="/contact" element={<ContactPage />} />
         
-        <Route element={<MainLayout />}>
+        <Route element={<ProtectedRoute><MainLayout /></ProtectedRoute>}>
           <Route path="dashboard" element={<Dashboard />} />
           
           {/* Profit Center Routes */}

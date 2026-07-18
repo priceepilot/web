@@ -33,7 +33,9 @@ export function PricingPage() {
       {/* Header */}
       <header className="pricing-header">
         <Link to="/" className="landing-logo">
-          <Mountain className="landing-logo-icon" size={28} />
+          <div className="logo-icon" style={{ background: 'transparent', width: 'auto', height: 'auto' }}>
+            <img src="/logo.png" alt="PricePilot" style={{ width: '32px', height: '32px', borderRadius: '8px' }} />
+          </div>
           PricePilot
         </Link>
         <nav className="landing-nav">
@@ -242,10 +244,10 @@ export function PricingPage() {
       {/* Footer */}
       <footer className="landing-footer footer-section">
         <div className="footer-content">
-          <div className="footer-col">
-            <div className="landing-logo" style={{ marginBottom: '16px' }}>
-              <Mountain className="landing-logo-icon" size={24} /> PricePilot
-            </div>
+          <div className="landing-footer-brand">
+            <Link to="/" className="landing-footer-logo">
+              <img src="/logo.png" alt="PricePilot" style={{ width: '24px', height: '24px', borderRadius: '6px' }} /> PricePilot
+            </Link>
             <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.875rem' }}>Automate global margins.<br/>Scale without complexity.</p>
           </div>
           <div className="footer-col">

@@ -71,7 +71,7 @@ export function LoginPage({ defaultIsLogin = true }) {
   const handleAuthSuccess = () => {
     setStatus('Success! Redirecting...');
     setTimeout(() => {
-      navigate('/dashboard');
+      navigate('/pricing');
     }, 500);
   };
 
@@ -124,7 +124,7 @@ export function LoginPage({ defaultIsLogin = true }) {
       <div className="auth-showcase">
         <div className="auth-showcase-content">
           <Link to="/" className="auth-logo">
-            <div className="auth-logo-icon">P</div>
+            <img src="/logo.png" alt="PricePilot Logo" className="auth-logo-img" style={{ width: '32px', height: '32px', borderRadius: '8px' }} />
             PricePilot
           </Link>
           

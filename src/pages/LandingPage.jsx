@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import HeroSection from '../components/landing/HeroSection';
 import ProblemSection from '../components/landing/ProblemSection';
 import SolutionSection from '../components/landing/SolutionSection';
@@ -32,10 +32,12 @@ export function LandingPage() {
       {/* Navigation */}
       <header className={`landing-header ${scrolled ? 'scrolled' : ''}`}>
         <div className="landing-header-left">
-          <div className="landing-logo">
-            <div className="landing-logo-icon">P</div>
+          <Link to="/" className="landing-logo">
+            <div className="logo-icon" style={{ background: 'transparent', width: 'auto', height: 'auto' }}>
+              <img src="/logo.png" alt="PricePilot" style={{ width: '32px', height: '32px', borderRadius: '8px' }} />
+            </div>
             PricePilot
-          </div>
+          </Link>
           <nav className="landing-nav">
             <a href="#product">Product</a>
             <a href="#features">Features</a>

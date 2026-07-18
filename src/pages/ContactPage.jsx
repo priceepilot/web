@@ -19,7 +19,9 @@ export function ContactPage() {
       {/* Reusing the Landing Page Header */}
       <header className="landing-header">
         <Link to="/" className="landing-logo">
-          <Mountain size={28} />
+          <div className="logo-icon" style={{ background: 'transparent', width: 'auto', height: 'auto' }}>
+            <img src="/logo.png" alt="PricePilot" style={{ width: '32px', height: '32px', borderRadius: '8px' }} />
+          </div>
           PricePilot
         </Link>
         <nav className="landing-nav">
@@ -117,9 +119,9 @@ export function ContactPage() {
       <footer className="landing-footer">
         <div className="footer-content">
           <div className="footer-col">
-            <div className="landing-logo" style={{ marginBottom: '16px' }}>
-              <Mountain size={24} /> PricePilot
-            </div>
+            <Link to="/" className="landing-logo" style={{ marginBottom: '16px', display: 'inline-flex' }}>
+              <img src="/logo.png" alt="PricePilot" style={{ width: '24px', height: '24px', borderRadius: '6px', marginRight: '8px' }} /> PricePilot
+            </Link>
             <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.875rem', lineHeight: 1.5, maxWidth: '250px' }}>
               Automate global margins.<br/>Scale without complexity.
             </p>
