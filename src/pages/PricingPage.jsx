@@ -124,7 +124,8 @@ export function PricingPage() {
       <section className="feature-table-section">
         <Reveal type="fade-up">
           <h2 className="feature-table-title">Compare Features</h2>
-          <table className="pricing-table">
+          <div className="pricing-table-container">
+            <table className="pricing-table">
             <thead>
               <tr>
                 <th style={{ width: '40%' }}>Feature</th>
@@ -195,6 +196,7 @@ export function PricingPage() {
               </tr>
             </tbody>
           </table>
+          </div>
         </Reveal>
       </section>
 
