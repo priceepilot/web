@@ -255,7 +255,7 @@ export function PricingPage() {
             <Link to="/" className="landing-footer-logo">
               <img src="/logo.png" alt="PricePilot" style={{ width: '24px', height: '24px', borderRadius: '6px' }} /> PricePilot
             </Link>
-            <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '0.875rem' }}>Automate global margins.<br/>Scale without complexity.</p>
+            <p style={{ color: '#475569', fontSize: '0.875rem' }}>Automate global margins.<br/>Scale without complexity.</p>
           </div>
           <div className="footer-col">
             <h4>Product</h4>
