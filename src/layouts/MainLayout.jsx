@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import { Sidebar } from './Sidebar';
 import { TopNav } from './TopNav';
@@ -11,6 +11,14 @@ export function MainLayout() {
   const [isPinned, setIsPinned] = useState(() => {
     return localStorage.getItem('pricepilot_sidebar_pinned') === 'true';
   });
+
+  useEffect(() => {
+    // Dashboard defaults to dark mode unless explicitly set to light
+    const savedTheme = localStorage.getItem('pricepilot_theme');
+    if (savedTheme !== 'light') {
+      document.documentElement.classList.add('dark-theme');
+    }
+  }, []);
 
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 

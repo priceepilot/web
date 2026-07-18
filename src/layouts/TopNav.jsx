@@ -5,7 +5,7 @@ import './TopNav.css';
 
 export function TopNav({ onMenuClick }) {
   const [isDark, setIsDark] = useState(() => {
-    return !document.documentElement.classList.contains('light-theme');
+    return document.documentElement.classList.contains('dark-theme');
   });
 
   const toggleTheme = (e) => {
@@ -18,10 +18,12 @@ export function TopNav({ onMenuClick }) {
     
     const performThemeChange = () => {
       if (isCurrentlyDark) {
-        document.documentElement.classList.add('light-theme');
+        document.documentElement.classList.remove('dark-theme');
+        localStorage.setItem('pricepilot_theme', 'light');
         setIsDark(false);
       } else {
-        document.documentElement.classList.remove('light-theme');
+        document.documentElement.classList.add('dark-theme');
+        localStorage.setItem('pricepilot_theme', 'dark');
         setIsDark(true);
       }
     };

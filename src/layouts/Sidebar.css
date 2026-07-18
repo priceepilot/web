@@ -202,59 +202,123 @@
 .sidebar-scrollable::-webkit-scrollbar { display: none; }
 
 /* Nav Groups */
-.sidebar-nav, .sidebar-nav-section {
+.sidebar-nav {
   display: flex;
   flex-direction: column;
-  margin-bottom: 4px; /* Reduced gap between groups */
+  margin-bottom: 4px;
 }
 
-.sidebar-nav-heading {
+.sidebar-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2px;
+}
+
+.sidebar-group-btn {
   display: flex;
   align-items: center;
-  font-size: var(--font-size-xs);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--color-text-secondary);
-  margin: 0 0 2px 0; /* Reduced margin */
-  padding: 10px 10px;
+  width: 100%;
+  background: none;
+  border: none;
+  height: 36px;
+  padding: 0 10px;
   border-radius: var(--radius-md);
-  white-space: nowrap;
+  color: var(--color-text-primary);
+  cursor: pointer;
   transition: background-color 150ms, color 150ms;
+  position: relative;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
-.sidebar-nav-heading-text,
-.sidebar-nav-heading-chevron {
-  opacity: 0;
-  transform: translateX(-5px);
-  transition: opacity 200ms ease-in-out, transform 200ms ease-in-out;
-}
-
-.sidebar.sidebar-expanded .sidebar-nav-heading-text,
-.sidebar.sidebar-expanded .sidebar-nav-heading-chevron {
-  opacity: 1;
-  transform: translateX(0);
-}
-
-.sidebar-nav-heading:hover {
+.sidebar-group-btn:hover {
   background-color: var(--color-surface);
   color: var(--color-text-primary);
 }
 
-.sidebar-link-wrapper {
-  position: relative;
-  opacity: 0;
-  height: 0;
-  pointer-events: none;
-  overflow: hidden;
-  transition: opacity 200ms;
+.sidebar-group-btn:hover .sidebar-group-icon {
+  color: var(--color-text-primary);
 }
 
-.sidebar.sidebar-expanded .sidebar-link-wrapper {
+.sidebar-group-icon {
+  flex-shrink: 0;
+  transition: color 150ms;
+}
+
+.sidebar-group-text {
+  margin-left: 12px;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  opacity: 0;
+  transform: translateX(-5px);
+  transition: opacity 200ms ease-in-out, transform 200ms ease-in-out;
+  flex: 1;
+  text-align: left;
+}
+
+.sidebar.sidebar-expanded .sidebar-group-text {
   opacity: 1;
-  height: auto;
+  transform: translateX(0);
+}
+
+.sidebar-group-chevron {
+  opacity: 0;
+  transition: transform 200ms ease-in-out, opacity 200ms ease-in-out;
+}
+
+.sidebar.sidebar-expanded .sidebar-group-chevron {
+  opacity: 1;
+}
+
+.sidebar-group-btn-open .sidebar-group-chevron {
+  transform: rotate(180deg);
+}
+
+.sidebar-subitems {
+  display: flex;
+  flex-direction: column;
+  margin-top: 2px;
+  margin-bottom: 4px;
+  overflow: hidden;
+}
+
+.sidebar:not(.sidebar-expanded) .sidebar-subitems {
+  display: none;
+}
+
+.sidebar-sublink {
+  display: flex;
+  align-items: center;
+  height: 32px;
+  padding: 0 10px 0 38px; /* Indented padding */
+  margin-bottom: 2px;
+  border-radius: var(--radius-md);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  transition: background-color 150ms, color 150ms;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.sidebar.sidebar-expanded .sidebar-sublink {
+  opacity: 1;
   pointer-events: auto;
-  overflow: visible;
+}
+
+.sidebar-sublink:hover {
+  color: var(--color-text-primary);
+}
+
+.sidebar-sublink-active {
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
+  font-weight: 600;
+}
+
+.sidebar-link-wrapper {
+  position: relative;
 }
 
 .sidebar-link, .sidebar-link-mock {
@@ -264,17 +328,13 @@
   padding: 0 10px;
   margin-bottom: 2px;
   border-radius: var(--radius-md);
-  color: var(--color-text-secondary);
+  color: var(--color-text-primary);
   text-decoration: none;
   transition: background-color 150ms, color 150ms, padding-left 200ms;
   position: relative;
   overflow: hidden;
   white-space: nowrap;
   cursor: pointer;
-}
-
-.sidebar.sidebar-expanded .sidebar-link {
-  padding-left: 28px; /* Indent sub-items when expanded */
 }
 
 .sidebar-link-icon {
@@ -294,7 +354,7 @@
 
 .sidebar-link-text {
   margin-left: 12px;
-  font-size: var(--font-size-xs); /* Smaller than main heading */
+  font-size: var(--font-size-sm); /* Matched to main group text */
   font-weight: 500;
   opacity: 0;
   transform: translateX(-5px);

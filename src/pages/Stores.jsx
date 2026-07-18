@@ -49,18 +49,47 @@ const PLATFORMS = [
   { id: 'magento', name: 'Magento', color: '#EE672F' }
 ];
 
+const API_URL = import.meta.env.VITE_API_URL || 'https://engine-494234282337.europe-west1.run.app';
+
 export function Stores() {
   const [stores, setStores] = useState(INITIAL_STORES);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPlatform, setSelectedPlatform] = useState(null);
   const [storeUrl, setStoreUrl] = useState('');
   const [isConnecting, setIsConnecting] = useState(false);
+  const [connectError, setConnectError] = useState('');
 
   const handleConnect = () => {
     if (!selectedPlatform || !storeUrl) return;
-    
+    setConnectError('');
+
+    // --- Real Shopify OAuth Flow ---
+    if (selectedPlatform.id === 'shopify') {
+      // Clean up the input
+      let shop = storeUrl
+        .replace(/^https?:\/\//, '')
+        .replace(/^www\./, '')
+        .replace(/\/$/, '')
+        .trim();
+
+      // Ensure it ends with .myshopify.com
+      if (!shop.includes('.myshopify.com')) {
+        shop = `${shop}.myshopify.com`;
+      }
+
+      // Validate format
+      if (!/^[a-zA-Z0-9-]+\.myshopify\.com$/.test(shop)) {
+        setConnectError('Enter a valid Shopify store URL (e.g. my-store or my-store.myshopify.com)');
+        return;
+      }
+
+      // Redirect browser to backend OAuth start — backend handles the rest
+      window.location.href = `${API_URL}/auth/shopify?shop=${shop}`;
+      return;
+    }
+
+    // --- Mock flow for Amazon, WooCommerce, Magento ---
     setIsConnecting(true);
-    
     setTimeout(() => {
       const newStore = {
         id: Date.now(),
@@ -73,7 +102,6 @@ export function Stores() {
         orders: '0',
         trend: '+0%'
       };
-      
       setStores([...stores, newStore]);
       setIsConnecting(false);
       setIsModalOpen(false);
@@ -238,10 +266,22 @@ export function Stores() {
             </div>
           )}
 
+          {connectError && (
+            <div style={{ color: '#ef4444', fontSize: '13px', padding: '8px 0' }}>
+              ⚠️ {connectError}
+            </div>
+          )}
+
+          {selectedPlatform?.id === 'shopify' && !connectError && (
+            <div style={{ color: 'rgba(255,255,255,0.5)', fontSize: '12px', padding: '4px 0' }}>
+              You'll be redirected to Shopify to approve the connection.
+            </div>
+          )}
+
           <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '12px', marginTop: '8px' }}>
-            <Button variant="secondary" onClick={() => setIsModalOpen(false)} disabled={isConnecting}>Cancel</Button>
+            <Button variant="secondary" onClick={() => { setIsModalOpen(false); setConnectError(''); }} disabled={isConnecting}>Cancel</Button>
             <Button onClick={handleConnect} disabled={!selectedPlatform || !storeUrl || isConnecting}>
-              {isConnecting ? 'Connecting...' : 'Connect Store'}
+              {selectedPlatform?.id === 'shopify' ? 'Connect with Shopify →' : isConnecting ? 'Connecting...' : 'Connect Store'}
             </Button>
           </div>
         </div>

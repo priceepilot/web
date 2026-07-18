@@ -11,62 +11,59 @@ import clsx from 'clsx';
 import { Badge } from '../components/Badge';
 import './Sidebar.css';
 
-const navGroups = [
-  {
-    title: 'OVERVIEW',
-    icon: Compass,
+const NAVIGATION = [
+  { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
+  { 
+    name: 'Profit Center', icon: TrendingUp,
     items: [
-      { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
-      { name: 'Profit Intelligence', href: '/profit', icon: TrendingUp },
-      { name: 'PricePilot Intelligence', href: '/ai-copilot', icon: Sparkles },
+      { name: 'Overview', href: '/profit-center' },
+      { name: 'Revenue', href: '/profit-center/revenue' },
+      { name: 'Profit', href: '/profit-center/profit' },
+      { name: 'Orders', href: '/profit-center/orders' },
+      { name: 'Countries', href: '/profit-center/countries' },
+      { name: 'Products', href: '/profit-center/products' },
+      { name: 'Costs', href: '/profit-center/costs' },
+      { name: 'Reports', href: '/profit-center/reports' }
     ]
   },
   {
-    title: 'INTELLIGENCE',
-    icon: Brain,
+    name: 'Pricy AI', icon: Brain,
     items: [
-      { name: 'Forecasting', href: '/forecasting', icon: LineChart },
-      { name: 'Country Intelligence', href: '/countries', icon: Globe },
-      { name: 'Margin Analysis', href: '/analytics', icon: PieChart },
-      { name: 'Smart Alerts', href: '/alerts', icon: Bell },
+      { name: 'Pricy Chat', href: '/pricy-ai/chat' },
+      { name: 'Insights', href: '/pricy-ai/insights' },
+      { name: 'Forecast', href: '/pricy-ai/forecast' },
+      { name: 'Pricing Advisor', href: '/pricy-ai/advisor' },
+      { name: 'Market Finder', href: '/pricy-ai/markets' },
+      { name: 'Risk Center', href: '/pricy-ai/risk-center' },
+      { name: 'Tasks', href: '/pricy-ai/tasks' },
+      { name: 'History', href: '/pricy-ai/history' }
     ]
   },
   {
-    title: 'OPTIMIZATION',
-    icon: Zap,
+    name: 'Optimization', icon: Zap,
     items: [
-      { name: 'Pricing Rules', href: '/optimization', icon: Settings2 },
-      { name: 'Recommendations', href: '/opportunities', icon: Lightbulb },
-      { name: 'Experiments', href: '/experiments', icon: Beaker },
+      { name: 'Pricing Rules', href: '/optimization/rules' },
+      { name: 'Margin Protection', href: '/optimization/margin' },
+      { name: 'Automation', href: '/optimization/automation' },
+      { name: 'Experiments', href: '/optimization/experiments' }
     ]
   },
-  {
-    title: 'OPERATIONS',
-    icon: Layers,
-    items: [
-      { name: 'Stores', href: '/stores', icon: Store },
-      { name: 'Integrations', href: '/integrations', icon: LinkIcon },
-      { name: 'Team', href: '/team', icon: Users },
-    ]
-  },
-  {
-    title: 'ADMINISTRATION',
-    icon: Shield,
-    items: [
-      { name: 'Billing', href: '/billing', icon: CreditCard },
-      { name: 'Settings', href: '/settings', icon: Settings },
-    ]
-  }
+  { name: 'Reports', href: '/reports', icon: PieChart },
+  { name: 'Stores', href: '/stores', icon: Store },
+  { name: 'Integrations', href: '/integrations', icon: LinkIcon },
+  { name: 'Team', href: '/team', icon: Users },
+  { name: 'Billing', href: '/billing', icon: CreditCard },
+  { name: 'Settings', href: '/settings', icon: Settings }
 ];
 
 export function Sidebar({ isOpen, onClose, isPinned, togglePinned }) {
   const [isHovered, setIsHovered] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
-  const [collapsedGroups, setCollapsedGroups] = useState([]);
+  const [openMenus, setOpenMenus] = useState([]); // default closed
 
-  const toggleGroup = (title) => {
-    setCollapsedGroups(prev => 
-      prev.includes(title) ? prev.filter(t => t !== title) : [...prev, title]
+  const toggleMenu = (name) => {
+    setOpenMenus(prev => 
+      prev.includes(name) ? prev.filter(n => n !== name) : [...prev, name]
     );
   };
 
@@ -121,36 +118,54 @@ export function Sidebar({ isOpen, onClose, isPinned, togglePinned }) {
 
         <div className="sidebar-scrollable">
           
-
-
-          {navGroups.map((group, idx) => (
-            <nav key={group.title} className="sidebar-nav">
-              <p 
-                className="sidebar-nav-heading" 
-                onClick={() => toggleGroup(group.title)}
-                style={{ cursor: 'pointer', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
-              >
-                <span style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-                  {group.icon && <group.icon size={16} className="sidebar-nav-heading-icon" />}
-                  <span className="sidebar-nav-heading-text">{group.title}</span>
-                </span>
-                <ChevronDown size={14} className="sidebar-nav-heading-chevron" style={{ transform: collapsedGroups.includes(group.title) ? 'rotate(-90deg)' : 'none', transition: 'transform 0.2s' }} />
-              </p>
-              {!collapsedGroups.includes(group.title) && group.items.map((item) => (
+          <nav className="sidebar-nav">
+            {NAVIGATION.map((item) => {
+              if (item.items) {
+                const isOpen = openMenus.includes(item.name);
+                return (
+                  <div key={item.name} className="sidebar-group">
+                    <button 
+                      className={clsx("sidebar-group-btn", { "sidebar-group-btn-open": isOpen })}
+                      onClick={() => toggleMenu(item.name)}
+                    >
+                      <item.icon size={18} className="sidebar-group-icon" />
+                      <span className="sidebar-group-text">{item.name}</span>
+                      <ChevronDown size={14} className="sidebar-group-chevron" />
+                    </button>
+                    {isOpen && (
+                      <div className="sidebar-subitems">
+                        {item.items.map(sub => (
+                          <NavLink
+                            key={sub.name}
+                            to={sub.href}
+                            end
+                            className={({ isActive }) => clsx('sidebar-sublink', { 'sidebar-sublink-active': isActive })}
+                            onClick={onClose}
+                          >
+                            <span className="sidebar-sublink-text">{sub.name}</span>
+                          </NavLink>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              }
+              
+              return (
                 <div key={item.name} className="sidebar-link-wrapper">
                   <NavLink
                     to={item.href}
                     className={({ isActive }) => clsx('sidebar-link', { 'sidebar-link-active': isActive })}
                     onClick={onClose}
                   >
-                    <item.icon className="sidebar-link-icon" size={16} />
+                    <item.icon className="sidebar-link-icon" size={18} />
                     <span className="sidebar-link-text">{item.name}</span>
                   </NavLink>
                   {!isExpanded && <div className="sidebar-tooltip">{item.name}</div>}
                 </div>
-              ))}
-            </nav>
-          ))}
+              );
+            })}
+          </nav>
 
 
 

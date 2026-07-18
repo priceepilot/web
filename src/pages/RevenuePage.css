@@ -1,0 +1,246 @@
+.revenue-dashboard {
+  padding: 24px;
+  max-width: 1440px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  background-color: var(--color-surface);
+  min-height: 100vh;
+}
+
+/* Base Card Style */
+.rev-card {
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+}
+
+.rev-card-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Top Metrics Grid */
+.rev-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.rev-metric-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.rev-metric-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.rev-metric-title {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.05em;
+}
+
+.rev-metric-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-secondary);
+}
+
+.rev-metric-value {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: var(--color-text-primary);
+  margin-bottom: 8px;
+}
+
+.rev-metric-trend {
+  font-size: 0.8rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.rev-trend-positive { color: #10B981; }
+.rev-trend-negative { color: #EF4444; }
+
+/* Middle Row Grid */
+.rev-middle-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* Revenue by Product */
+.rev-product-bars {
+  display: flex;
+  width: 100%;
+  height: 24px;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 24px;
+  gap: 4px;
+}
+.rev-product-bar-segment {
+  height: 100%;
+}
+.rev-product-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.rev-product-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.rev-product-label {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--color-text-primary);
+}
+.rev-product-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 4px;
+}
+.rev-product-stats {
+  color: var(--color-text-primary);
+}
+.rev-product-percent {
+  color: var(--color-text-secondary);
+  margin-left: 8px;
+}
+
+/* Sales Target Gauge */
+.rev-gauge-container {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+.rev-gauge-center {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.rev-gauge-icon {
+  background: var(--color-surface);
+  border-radius: 50%;
+  padding: 8px;
+  color: var(--color-text-secondary);
+  margin-bottom: 8px;
+}
+.rev-gauge-value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--color-text-primary);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.rev-gauge-sub {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #10B981;
+}
+.rev-gauge-sub span {
+  color: var(--color-text-secondary);
+}
+
+/* Bottom Row Grid */
+.rev-bottom-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 24px;
+}
+
+/* Funnel Custom Area */
+.rev-funnel-container {
+  position: relative;
+  width: 100%;
+  height: 280px;
+}
+
+/* Modals for Expanded Cards */
+.rev-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+.rev-modal-content {
+  position: relative;
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 40px;
+  width: 100%;
+  max-width: 900px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+}
+.rev-modal-close {
+  position: absolute;
+  top: 16px;
+  right: 24px;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.rev-modal-close:hover {
+  color: var(--color-text-primary);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .rev-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .rev-middle-grid {
+    grid-template-columns: 1fr;
+  }
+  .rev-bottom-grid {
+    grid-template-columns: 1fr;
+  }
+}

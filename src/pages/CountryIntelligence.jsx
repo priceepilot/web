@@ -26,6 +26,7 @@ const INSIGHTS = [
 export function CountryIntelligence() {
   const [activeCountry, setActiveCountry] = useState(null);
   const [position, setPosition] = useState({ coordinates: [0, 0], zoom: 1 });
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
   const activeCountryData = COUNTRY_DATA.find(c => c.id === activeCountry);
 
@@ -74,7 +75,17 @@ export function CountryIntelligence() {
               </div>
             </div>
             
-            <div className="ci-map-container" style={{ position: 'relative', flex: 1, overflow: 'hidden' }}>
+            <div 
+              className="ci-map-container" 
+              style={{ position: 'relative', flex: 1, overflow: 'hidden' }}
+              onMouseMove={(e) => {
+                const rect = e.currentTarget.getBoundingClientRect();
+                setMousePos({
+                  x: e.clientX - rect.left,
+                  y: e.clientY - rect.top
+                });
+              }}
+            >
               <ComposableMap projection="geoMercator" projectionConfig={{ scale: 140 }} style={{ width: '100%', height: '100%', outline: 'none' }}>
                 <ZoomableGroup 
                   zoom={position.zoom} 
@@ -123,7 +134,17 @@ export function CountryIntelligence() {
               </div>
 
               {/* Map Info Panel */}
-              <div className={`ci-map-info-panel ${activeCountryData ? 'visible' : ''}`}>
+              <div 
+                className={`ci-map-info-panel ${activeCountryData ? 'visible' : ''}`}
+                style={activeCountryData ? {
+                  position: 'absolute',
+                  left: `${mousePos.x + 15}px`,
+                  top: `${mousePos.y + 15}px`,
+                  bottom: 'auto',
+                  transform: 'none', // override CSS transform
+                  zIndex: 30
+                } : {}}
+              >
                 {activeCountryData && (
                   <>
                     <div className="ci-tooltip-header">

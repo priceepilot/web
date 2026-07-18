@@ -201,7 +201,6 @@
   100% { transform: scale(2.0); opacity: 0; }
 }
 
-/* Map Info Panel */
 .ci-map-info-panel {
   position: absolute;
   bottom: 20px;
@@ -214,7 +213,7 @@
   width: 200px;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.2s;
+  transition: opacity 0.2s, visibility 0.2s, transform 0.2s; /* Don't transition left/top */
   box-shadow: 0 10px 30px rgba(0,0,0,0.5);
   z-index: 20;
   pointer-events: none;
